@@ -1,0 +1,90 @@
+// Библиотека управления книгами (100 строк для отчета)
+struct Book {
+    id: u32,
+    title: String,
+    author: String,
+    pages: u32,
+}
+
+impl Book {
+    fn new(id: u32, title: &str, author: &str, pages: u32) -> Book {
+        Book {
+            id,
+            title: title.to_string(),
+            author: author.to_string(),
+            pages,
+        }
+    }
+
+    fn check_size(&self) -> &str {
+        if self.pages > 400 {
+            "Big"
+        } else {
+            "Small"
+        }
+    }
+}
+
+fn calculate_complexity(p: u32, a: u32) -> u32 {
+    let mut res = p * a;
+    if res > 1000 {
+        res = res / 2;
+    }
+    res
+}
+
+fn process_library() {
+    let mut catalog = Vec::new();
+    let b1 = Book::new(1, "Rust Guide", "Author A", 500);
+    let b2 = Book::new(2, "C# Basics", "Author B", 250);
+    let b3 = Book::new(3, "Algorithms", "Author C", 600);
+
+    catalog.push(b1);
+    catalog.push(b2);
+    catalog.push(b3);
+
+    let mut i = 0;
+    while i < catalog.len() {
+        let book = &catalog[i];
+        let size = book.check_size();
+        println!("Book: {}, Size: {}", book.title, size);
+        i += 1;
+    }
+}
+
+fn main() {
+    println!("Starting analysis...");
+    process_library();
+
+    let val1 = 15;
+    let val2 = 30;
+    let score = calculate_complexity(val1, val2);
+
+    match score {
+        0..=100 => println!("Low"),
+        101..=500 => println!("Medium"),
+        _ => println!("High"),
+    }
+
+    let mut counter = 0;
+    loop {
+        counter += 1;
+        if counter == 10 {
+            break;
+        }
+    }
+
+    let status = true;
+    if status {
+        println!("Work Done with score: {}", score);
+    }
+    
+    // Дополнительные строки для объема
+    let x = 1;
+    let y = 2;
+    let z = x + y;
+    if z > 0 {
+        let msg = "Finishing";
+        println!("{}", msg);
+    }
+}
